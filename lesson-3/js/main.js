@@ -6,7 +6,7 @@ let x = +prompt( 'Number' );
 
 if(x > 0) {
   alert( `${x} - положительное число`)
-} else if (x<0) {
+} else if (x < 0) {
   alert( `${x} - отрицательное число` )
 } else {
   alert( `${x} - ноль` )
@@ -83,21 +83,21 @@ if(day !== 0 && day !== 6 ){
 
 
 // --- task 7, task 8 ---
-let x = +prompt('Введите число от -20 до 20'),
-    y = +prompt('Введите еще одно число от -20 до 20');
+let X = +prompt('Введите число от -20 до 20'),
+    Y = +prompt('Введите еще одно число от -20 до 20');
 
-if( x <= 1 && (y >= 3 || y < 0) ) {
-  alert( x + y );
+if( X <= 1 && (Y >= 3 || Y < 0) ) {
+  alert( X + Y );
 } else {
   alert( 'Неверно!' );
 }
 
-if( (x > 2 && x < 11) || (y >= 6 && y < 14) ){
-  x = x * 2;
+if( (X > 2 && X < 11) || (Y >= 6 && Y < 14) ){
+  X = X * 2;
 } else {
-  x = x + 5;
+  X = X + 5;
 }
-alert( x );
+alert( X );
 
 
 // --- task 9 ---
@@ -164,16 +164,16 @@ switch (currentMonth) {
 
 
 // --- task 12 ---
-let lang = 'en', // 'en', 'ru'
-    day = 6; // 0-6
+let lanG = 'en', // 'en', 'ru'
+    daY = 6; // 0-6
 
 arrDayRu = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 arrDayEn = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-if(lang === 'ru'){
-  alert(arrDayRu[day]);
+if(lanG === 'ru'){
+  alert(arrDayRu[daY]);
 } else {
-  alert(arrDayEn[day]);
+  alert(arrDayEn[daY]);
 }
 
 
@@ -256,8 +256,8 @@ for(let a = 1; a <= 10; a++){
 
 
 // --- task 8 ---
-let a = 1, b = 1, c = 0;
-for (let i = 3; i <= 50; c = a + b, a = b, b = c, i++ ) {}
+let a = 1, b = 1, C = 0;
+for (let i = 3; i <= 50; C = a + b, a = b, b = C, i++ ) {}
 console.log(b);
 
 
