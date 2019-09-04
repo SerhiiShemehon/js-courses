@@ -62,7 +62,7 @@ if (yourNumber%2 === 1) {
 
 let yourStr = prompt('Напиши что-то, и я скажу число это или нет');
 
-if ( yourStr && !isNaN(yourStr) ) {
+if ( !isNaN(yourStr) ) {
   alert( 'Поздравляю, у тебя получилось ввести число :)' );
 } else {
   alert( 'Чет стремное ты ввел :(' );
