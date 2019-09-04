@@ -60,9 +60,9 @@ if (yourNumber%2 === 1) {
 
 // --- task six ---
 
-let yourStr = +prompt('Напиши что-то, и я скажу число это или нет');
+let yourStr = prompt('Напиши что-то, и я скажу число это или нет');
 
-if (yourStr && typeof yourStr === 'number') {
+if ( yourStr && !isNaN(yourStr) ) {
   alert( 'Поздравляю, у тебя получилось ввести число :)' );
 } else {
   alert( 'Чет стремное ты ввел :(' );
