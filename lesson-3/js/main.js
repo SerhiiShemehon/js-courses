@@ -209,7 +209,7 @@ for(let j = 0; j < 4; j++){
 
 
 // --- task 4 ---
-for(let k = 0; k < 10; k++) {
+for(;;) {
   let currentConfirm = confirm('Остановить цикл?');
   if (currentConfirm) break;
 }
@@ -256,9 +256,9 @@ for(let a = 1; a <= 10; a++){
 
 
 // --- task 8 ---
-let a = 1, b = 1, C = 0;
-for (let i = 3; i <= 50; C = a + b, a = b, b = C, i++ ) {}
-console.log(b);
+let a = 0, b = 1, C = 0, newStr = a + ' ' + b;
+for (let i = 3; i <= 20; C = a + b, a = b, b = C, newStr = newStr + ' ' + b, i++ ) {}
+console.log(newStr);
 
 
 // --- task 9 ---
