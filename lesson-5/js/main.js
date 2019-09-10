@@ -189,7 +189,7 @@ console.log(s);
                               // <имя_автора>, <дата>
                               // <текст_сообщения>
 
-// ET = 40h
+// ET = 40m
 // AT = 25m
 
 function setComment(date, massage, author = 'Anonymous') {
@@ -221,7 +221,22 @@ setComment('2016-11-02', 'You could do it better!');
 // alert('!') // код, время выполнения которого нужно измерить
 // alert(timer()); // время в мкс от начала выполнения createTimer() до
 // момента вызова timer()
+// ET = 30m
+// AT = 15m
 
+function createTimer() {
+  let time1 = performance.now();
+
+  return function() {
+    alert('!');
+    let time2 = performance.now();
+    return `время выполнения ${time2 - time1} миллисекунд`;
+  }
+}
+
+let timer = createTimer();
+
+alert(timer());
 
 
 
@@ -234,3 +249,20 @@ setComment('2016-11-02', 'You could do it better!');
 // var plus = createAdder(5);
 // alert(plus(1)); // 6
 // alert(plus(5)); // 10
+
+// ET = 30m
+// AT = 10m
+
+function createAdder(first) {
+  return function (second) {
+    return first + second;
+  }
+}
+
+let hello = createAdder('Hello, ');
+alert(hello('John'));
+alert(hello('Harry'));
+
+let plus = createAdder(5);
+alert(plus(1));
+alert(plus(5));
