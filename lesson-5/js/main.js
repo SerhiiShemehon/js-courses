@@ -1,3 +1,5 @@
+// Функции
+
 // --- task 1 ---
 // Напишите функцию max, которая сравнивает два числа и возвращает большее:
 // console.log(max(0, -1)); // 0
@@ -93,19 +95,19 @@ let users = [
   }
 ];
 
-// //   a.Отфильтруйте пользователей младше 18 лет
+// a.Отфильтруйте пользователей младше 18 лет
 let youngChild = users.filter((item) => item.age < 18); // Записываем в массив всех пользователей младше 18 лет 
 let adults = users.filter((item) => item.age >= 18); // Записываем в массив всех пользователей 18 лет и старше 
 console.log(youngChild);
 console.log(adults);
 
-// // b.Добавьте каждому объекту поле fullName, которое является конкатенацией имени и фамилии
+// b.Добавьте каждому объекту поле fullName, которое является конкатенацией имени и фамилии
 users.forEach(function (item) {
   item.fullName = `${item.firstname} ${item.lastname}`;
 });
 console.log(users);
 
-//   c.Сформируйте новый массив, который содержит только полное имя пользователей
+// c.Сформируйте новый массив, который содержит только полное имя пользователей
 let newUsers = users.map(item => item.fullName);
 console.log(newUsers);
 
@@ -151,3 +153,84 @@ console.log(fruits);
 
 
 // --- task 6 ---
+// Напишите функцию аналог метода Object.assign().Первый параметр функции - целевой объект, поля которого будут изменены или расширены.Остальные параметры - объекты - источники, полями которых будет расширяться целевой объект.
+// ET = 1h
+// AT = 35m
+
+let extend = (obj, ...argObj) => {
+  if (!Array.isArray(obj) && typeof obj == 'object' && !!obj ) {
+    
+    argObj.forEach((item) => {
+      if (!Array.isArray(item) && typeof item == 'object' && !!item) {
+        for (let key in item) {
+          obj[key] = item[key];
+        }
+      } else {
+        return alert('Функция ток для обектов');
+      }
+    } );
+
+    return obj;
+
+  } else {
+    return alert('Функция ток для обектов');
+  }
+}
+
+let source = { firstname: 'Tom', age: 10 };
+let s = extend(source, { firstname: 'John' }, { lastname: 'Doe'});
+console.log(source);
+console.log(s);
+
+
+// --- task 7 ---
+// Напишите функцию setComment с параметрами: date, message, author.Дата и текст сообщения - обязательные параметры, если какой - то из них или оба отсутствуют, то выполнение функции должно обрываться, а пользователю выдаваться предупреждение(alert) о том, что данные переданы некорректно.Параметр author - опциональный, но должна происходить проверка: если параметр не передан, то вместо него подставляется значение ‘Anonymous’.Функция распечатывает в консоле текст в формате:
+
+                              // <имя_автора>, <дата>
+                              // <текст_сообщения>
+
+// ET = 40h
+// AT = 25m
+
+function setComment(date, massage, author = 'Anonymous') {
+  if (arguments.length >= 2) {
+
+    if (date === undefined || massage === undefined) {
+      return alert('Данные переданы некорректно');
+    }
+  
+    console.log(`---------------------------
+|  ${author}, ${date}
+|  ${massage}
+---------------------------`);
+
+  } else {
+    return alert('Данные переданы некорректно');
+  }
+}
+
+setComment('2016-11-02', 'Everything is ok', 'John');
+setComment('2016-11-02', 'You could do it better!');
+
+
+// Замыкания
+
+// --- task 1 ---
+// Используя замыкание, напишите функцию createTimer, которая использует метод performance.now() для получения текущей временной метки и служит для замера времени выполнения другого кода:
+// var timer = createTimer();
+// alert('!') // код, время выполнения которого нужно измерить
+// alert(timer()); // время в мкс от начала выполнения createTimer() до
+// момента вызова timer()
+
+
+
+
+
+// --- task 2 ---
+// // Используя замыкания, создайте функцию createAdder(), которая принимает на вход любой примитивный параметр и возвращает функцию, которая добавляет к первому параметру второй.Функция работает по следующему принципу:
+// var hello = createAdder('Hello, ');
+// alert(hello('John')); // Hello, John
+// alert(hello('Harry')); // Hello, Harry
+// var plus = createAdder(5);
+// alert(plus(1)); // 6
+// alert(plus(5)); // 10

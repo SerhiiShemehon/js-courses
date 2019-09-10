@@ -21,10 +21,10 @@ c. Сформируйте новый массив, который содержи
 6. Напишите функцию аналог метода Object.assign(). Первый параметр функции -
 целевой объект, поля которого будут изменены или расширены. Остальные
 параметры - объекты-источники, полями которых будет расширяться целевой объект.
-var source = {firstname: &#39;Tom&#39;, age: 10}
-var s = extend(source, {firstname: &#39;John&#39;}, {lastname: &#39;Doe&#39;});
-console.log(source); // {firstname: &#39;John&#39;, age: 10, lastname: &#39;Doe&#39;}
-console.log(s); // {firstname: &#39;John&#39;, age: 10, lastname: &#39;Doe&#39;}
+var source = {firstname: 'Tom', age: 10}
+var s = extend(source, {firstname: 'John'}, {lastname: 'Doe'});
+console.log(source); // {firstname: 'John', age: 10, lastname: 'Doe'}
+console.log(s); // {firstname: 'John', age: 10, lastname: 'Doe'}
 7. Напишите функцию setComment с параметрами: date, message, author. Дата и текст
 сообщения - обязательные параметры, если какой-то из них или оба отсутствуют, то
 выполнение функции должно обрываться, а пользователю выдаваться
@@ -33,10 +33,10 @@ console.log(s); // {firstname: &#39;John&#39;, age: 10, lastname: &#39;Doe&#39;}
 вместо него подставляется значение ‘Anonymous’. Функция распечатывает в консоле
 текст в формате:
 
-&lt;имя_автора&gt;, &lt;дата&gt;
-&lt;текст_сообщения&gt;
+<имя_автора>, <дата>
+<текст_сообщения>
 
-setComment(&#39;2016-11-02&#39;, &#39;Everything is ok&#39;, &#39;John&#39;);
+setComment('2016-11-02', 'Everything is ok', 'John');
 
 Перед каждой задачей указывайте оценочное время выполнения ET (Estimated Time) и реально затраченное
 время AT (Actual Time), а также ее номер и условие
@@ -44,7 +44,7 @@ setComment(&#39;2016-11-02&#39;, &#39;Everything is ok&#39;, &#39;John&#39;);
 John, 2016-12-22
 Everything is ok
 
-setComment(&#39;2016-11-02&#39;, &#39;You could do it better!&#39;);
+setComment('2016-11-02', 'You could do it better!');
 
 Anonymous, 2016-12-22
 You could do it better!
@@ -55,15 +55,15 @@ You could do it better!
 performance.now() для получения текущей временной метки и служит для замера
 времени выполнения другого кода:
 var timer = createTimer();
-alert(&#39;!&#39;) // код, время выполнения которого нужно измерить
+alert('!') // код, время выполнения которого нужно измерить
 alert( timer() ); // время в мкс от начала выполнения createTimer() до
 момента вызова timer()
 2. Используя замыкания, создайте функцию createAdder(), которая принимает на вход
 любой примитивный параметр и возвращает функцию, которая добавляет к первому
 параметру второй. Функция работает по следующему принципу:
-var hello = createAdder(&#39;Hello, &#39;);
-alert( hello(&#39;John&#39;) ); // Hello, John
-alert( hello(&#39;Harry&#39;) ); // Hello, Harry
+var hello = createAdder('Hello, ');
+alert( hello('John') ); // Hello, John
+alert( hello('Harry') ); // Hello, Harry
 var plus = createAdder(5);
 alert( plus(1) ); // 6
 alert( plus(5) ); // 10
