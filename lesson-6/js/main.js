@@ -245,3 +245,48 @@ function hello(name) {
 
 hello('World');
 hello('John');
+
+
+
+// Рекурсия
+
+
+// --- task 1 ---
+// Напишите функцию, которая возвращает куб переданного числа, аналог Math.pow(x, 3) – a) используя цикл b) используя рекурсию:
+// console.log(cube(2)); // 8
+// ET = 30m
+// AT = 1h
+
+// task 1.1 цикл
+function cube(number, power) {
+  let cubeNumber = number;
+  for (let i = 0; i < power - 1; i++) {
+    cubeNumber = cubeNumber * number;
+  }
+  return cubeNumber;
+}
+console.log(cube(2, 3));
+
+// task 1.2 рекурсия
+function cubeR(number, power) {
+  if (power !== 1){
+    return number * cubeR(number, power - 1)
+  }
+  return number;
+}
+
+console.log(cubeR(2, 3));
+
+
+// --- task 2 ---
+// Придумайте алгоритм расчета суммы всех фактических параметров функции с использованием только рекурсии:
+// console.log(sum(1, 2, 3, 4, 5)); // 15
+// ET = 30m
+// AT = 
+
+function sum(...numbers) {
+
+}
+
+
+console.log(sum([1, 2, 3, 4, 5]));
