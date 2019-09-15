@@ -286,7 +286,7 @@ console.log(cubeR(2, 3));
 
 function sum(...numbers) {
   if(numbers.length > 0){
-    return +numbers.pop() + +sum.apply(this, numbers);
+    return +numbers.pop() + +sum.apply(null, numbers);
   } else {
     return numbers;
   }
