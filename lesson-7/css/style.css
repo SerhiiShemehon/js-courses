@@ -58,11 +58,18 @@ html, body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 50%;
-  background-image: url(../images/jasper-js.jpg);
+  /* background-image: url(../images/jasper-js.jpg); */
 }
 h1 {
   font-size: 75px;
 }
 h2 {
   font-size: 50px;
+}
+
+.canvas-holder{
+	width: 800px;
+	height: 500px;
+	margin: 0 auto;
+	border: 1px solid #eee;
 }
