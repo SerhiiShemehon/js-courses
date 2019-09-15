@@ -282,11 +282,14 @@ console.log(cubeR(2, 3));
 // Придумайте алгоритм расчета суммы всех фактических параметров функции с использованием только рекурсии:
 // console.log(sum(1, 2, 3, 4, 5)); // 15
 // ET = 30m
-// AT = 
+// AT = Infinity (очень долго)
 
 function sum(...numbers) {
-
+  if(numbers.length > 0){
+    return +numbers.pop() + +sum.apply(this, numbers);
+  } else {
+    return numbers;
+  }
 }
 
-
-console.log(sum([1, 2, 3, 4, 5]));
+console.log(sum(1, 2, 3, 4, 5));
