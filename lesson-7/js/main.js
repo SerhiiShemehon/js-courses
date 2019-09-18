@@ -81,13 +81,15 @@ function Line(x1, y1, x2, y2, color) {
 function Canvas(elem) {
   let canvas = document.getElementById(elem);
 
-  if (canvas.getContext) {
-    let ctx = canvas.getContext('2d');
+  this.add = function (...arguments) {
+    if (canvas.getContext) {
+      let ctx = canvas.getContext('2d');
 
-    this.add = function (...arguments) {
       for(let i = 0; i < arguments.length; i++){
         arguments[i].draw(ctx);
       }
+    } else {
+      return alert('Ваш браузер не поддерживает Сanvas');
     }
   }
 }
