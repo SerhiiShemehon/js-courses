@@ -212,14 +212,13 @@ userFormat = format.bind(user);
 userFormat('<<<', '>>>');
 
 
-// --- task 6 ---
+// --- task 7 ---
 // Напишите функцию concat, которая соединяет две строки, разделенные каким-то символом: разделитель и строки передаются в параметрах функции. Используя карринг, создайте новую функцию hello, которая которая выводит приветствие тому, кто передан в ее параметре:
 // hello('World'); // Hello World
 // hello('John'); // Hello John
 // ET = 30m
 // AT = 30m
 
-// не очень понял что надо сделать в первой часте 
 function concat(separator, str1, str2) {
   return `${str1}${separator}${str2}`;
 }
@@ -227,21 +226,11 @@ let newStr = concat(', ', 'Hello', 'John');
 console.log(newStr);
 
 
-function hello(name) {
-  let hello = {
-    message: '',
-    getHello() {
-      this.message = this.message + 'Hello ';
-      return this;
-    },
-    getName() {
-      this.message = this.message + name;
-      return this;
-    }
-  }
-  hello.getHello().getName();
-  return console.log(hello.message);
+function messageHello(str, name) {
+  return console.log(`${str} ${name}`);
 }
+
+let hello = messageHello.bind(null, 'Hello');
 
 hello('World');
 hello('John');
@@ -276,6 +265,7 @@ function cubeR(number, power) {
 }
 
 console.log(cubeR(2, 3));
+
 
 
 // --- task 2 ---
