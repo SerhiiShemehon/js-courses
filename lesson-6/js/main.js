@@ -219,6 +219,8 @@ userFormat('<<<', '>>>');
 // ET = 30m
 // AT = 30m
 
+
+// --- task 7..1 ---
 function concat(separator, str1, str2) {
   return `${str1}${separator}${str2}`;
 }
@@ -226,6 +228,7 @@ let newStr = concat(', ', 'Hello', 'John');
 console.log(newStr);
 
 
+// --- task 7.2 ---
 function messageHello(str, name) {
   return console.log(`${str} ${name}`);
 }
