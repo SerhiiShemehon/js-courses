@@ -105,9 +105,9 @@ function ZigzagLine(x1, y1, x2, y2, color, repeat = '1', axisY) {
         for (let i = 0; i < repeat; i++) {
           currentY = currentY + stepY;
           if (i % 2 !== 0) {
-            currentX = this.y2;
+            currentX = this.x2;
           } else {
-            currentX = this.y;
+            currentX = this.x;
           }
           ctx.lineTo(currentX, currentY);
         }

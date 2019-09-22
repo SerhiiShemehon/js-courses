@@ -76,6 +76,62 @@ class Line extends Figure {
   }
 }
 
+// ZigzagLine для отрисовки  линии
+// x1, y1 - координаты начала линии (number)
+// x2, y2 - координаты точки перелома линии (number)
+// color - цвет линии 
+// repeat - количество переломов линии (number)
+// axisY - направления по оси (true/false)
+class ZigzagLine extends Figure {
+  constructor(x1, y1, x2, y2, color, repeat = '1', axisY) {
+    super(x1, y1, color);
+    this.x2 = x2;
+    this.y2 = y2;
+    this.repeat = repeat;
+    this.axisY = axisY;
+  }
+
+  draw(ctx) {
+    super.draw(ctx);
+    ctx.strokeStyle = this.color;
+    ctx.moveTo(this.x, this.y);
+    ctx.lineTo(this.x2, this.y2);
+    if (this.repeat > 1) {
+      if (this.axisY) {
+        let stepY = Math.abs(this.y2 - this.y);
+        let currentY = this.y2;
+        let currentX;
+
+        for (let i = 0; i < this.repeat; i++) {
+          currentY = currentY + stepY;
+          if (i % 2 !== 0) {
+            currentX = this.x2;
+          } else {
+            currentX = this.x;
+          }
+          ctx.lineTo(currentX, currentY);
+        }
+      } else {
+        let stepX = Math.abs(this.x2 - this.x);
+        let currentX = this.x2;
+        let currentY;
+
+        for (let i = 0; i < this.repeat; i++) {
+          currentX = currentX + stepX;
+          if (i % 2 !== 0) {
+            currentY = this.y2;
+          } else {
+            currentY = this.y;
+          }
+          ctx.lineTo(currentX, currentY);
+        }
+      }
+    }
+    ctx.stroke();
+  }
+}
+
+
 // для инициализации < canvas > из DOM.И имеет метод add, который и отображает созданные фигуры на странице
 class Canvas {
   constructor(elem){
@@ -95,11 +151,12 @@ class Canvas {
   }
 }
 
+let zigzagLine = new ZigzagLine(10, 10, 30, 30, 'red', 24); // x1, y1, x2, y2, color, repeat, axisY
 let line = new Line(50, 250, 200, 200, 'red'); // x1, y1, x2, y2, color
 let circle = new Circle(120, 120, 50, 'green'); // x, y, r, color
 let rect = new Rect(260, 130, 60, 120, 'blue'); // x, y, w, h, color
 let drawArea = new Canvas('canvasID');
 
 
-drawArea.add(line);
+drawArea.add(line, zigzagLine);
 drawArea.add(circle, rect);
