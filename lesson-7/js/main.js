@@ -77,6 +77,60 @@ function Line(x1, y1, x2, y2, color) {
   }
 }
 
+// ZigzagLine для отрисовки  линии
+// x1, y1 - координаты начала линии (number)
+// x2, y2 - координаты точки перелома линии (number)
+// color - цвет линии 
+// repeat - количество переломов линии (number)
+// axisY - направления по оси (true/false)
+function ZigzagLine(x1, y1, x2, y2, color, repeat = '1', axisY) {
+  Figure.call(this, x1, y1, color);
+
+  this.x2 = x2;
+  this.y2 = y2;
+
+  let newDraw = this.draw;
+
+  this.draw = function (ctx) {
+    newDraw.call(this, ctx);
+    ctx.strokeStyle = this.color;
+    ctx.moveTo(this.x, this.y);
+    ctx.lineTo(this.x2, this.y2);
+    if (repeat > 1 ) {
+      if (axisY){
+        let stepY = Math.abs(this.y2 - this.y);
+        let currentY = this.y2;
+        let currentX;
+
+        for (let i = 0; i < repeat; i++) {
+          currentY = currentY + stepY;
+          if (i % 2 !== 0) {
+            currentX = this.y2;
+          } else {
+            currentX = this.y;
+          }
+          ctx.lineTo(currentX, currentY);
+        }
+      } else {
+        let stepX = Math.abs(this.x2 - this.x);
+        let currentX = this.x2;
+        let currentY;
+
+        for (let i = 0; i < repeat; i++) {
+          currentX = currentX + stepX;
+          if( i % 2 !== 0 ){
+            currentY = this.y2;
+          } else {
+            currentY = this.y;
+          }
+          ctx.lineTo(currentX, currentY);
+        }
+      }
+    }
+    ctx.stroke();
+  }
+}
+
 // для инициализации < canvas > из DOM.И имеет метод add, который и отображает созданные фигуры на странице
 function Canvas(elem) {
   let canvas = document.getElementById(elem);
@@ -94,10 +148,12 @@ function Canvas(elem) {
   }
 }
 
+let zigzagLine = new ZigzagLine(10, 10, 30, 30, 'red', 16); // x1, y1, x2, y2, color, repeat, axisY
 let line = new Line(50, 250, 200, 200, 'red'); // x1, y1, x2, y2, color
 let circle = new Circle(120, 120, 50, 'green'); // x, y, r, color
 let rect = new Rect(260, 130, 60, 120, 'blue'); // x, y, w, h, color
 let drawArea = new Canvas('canvasID');
 
+drawArea.add(zigzagLine);
 drawArea.add(line);
 drawArea.add(circle, rect);
