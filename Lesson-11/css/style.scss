@@ -1,0 +1,176 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+html, body {
+  line-height: 1;
+  min-height: 100%;
+  height: 100%
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+*{
+  box-sizing: border-box;
+}
+
+.solar-system{
+  height: 100vh;
+  margin-top: -50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.sun{
+  width: 80px;
+  height: 80px;
+  background-image: url(../images/sun.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.description-holder{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px 100px;
+  background: rgba(0, 0, 0, 0.7);
+  transform: scale(0);
+  transition: transform 0.5s linear;
+  overflow-y: auto;
+  &.open{
+    transform: scale(1);
+  }
+  h2{
+    font-size: 40px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  p{
+    margin: 0 0 1em;
+  }
+  .img-holder{
+    width: 350px;
+    margin: 0 auto 20px;
+    img{
+      width: 100%;
+      height: auto;
+    }
+  }
+  .close{
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    cursor: pointer;
+    transition: color 0.3s linear;
+    &:hover{
+      color: green;
+    }
+    &:after{
+      content: '\2716';
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+      position: absolute;
+      font-size: 50px;
+    }
+  }
+}
+
+$planets: 
+  mercury 15px 40s, 
+  venus 20px 60s, 
+  earth 25px 50s,
+  mars 15px 40s, 
+  jupiter 40px 110s, 
+  saturn 55px 30s, 
+  uran 30px 150s, 
+  neptun 30px 90s;
+
+@each $planet, $wh, $duration in $planets {
+  .planet-#{$planet} {
+    width: #{$wh};
+    height: #{$wh};
+    background-image: url(../images/#{$planet}.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 50% 50%;
+    position: absolute;
+    cursor: pointer;
+    top: calc(50% - 10px);
+    left: calc(50% - 10px);
+    animation: #{$planet}Orbit #{$duration} linear infinite;
+  }
+}
+
+@keyframes mercuryOrbit {
+    from { transform: rotate(0deg) translateX(50px) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
+}
+@keyframes venusOrbit {
+    from { transform: rotate(0deg) translateX(70px) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(70px) rotate(-360deg); }
+}
+@keyframes earthOrbit {
+    from { transform: rotate(0deg) translateX(100px) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
+}
+@keyframes marsOrbit {
+    from { transform: rotate(0deg) translateX(130px) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(130px) rotate(-360deg); }
+}
+@keyframes jupiterOrbit {
+    from { transform: rotate(0deg) translateX(150px) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(150px) rotate(-360deg); }
+}
+@keyframes saturnOrbit {
+    from { transform: rotate(0deg) translateX(200px) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(200px) rotate(-360deg); }
+}
+@keyframes uranOrbit {
+    from { transform: rotate(0deg) translateX(250px) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(250px) rotate(-360deg); }
+}
+@keyframes neptunOrbit {
+    from { transform: rotate(0deg) translateX(290px) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(290px) rotate(-360deg); }
+}
