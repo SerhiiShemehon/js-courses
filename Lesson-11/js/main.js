@@ -15,7 +15,7 @@ let createSolarSystem = () => {
   titleSolarSystem.style.fontSize = '50px';
   solarSystem.before(titleSolarSystem);
 
-  BODY.style.backgroundImage = 'url(../images/bg.jpg';
+  BODY.style.backgroundImage = 'url(images/bg.jpg';
   BODY.style.backgroundSize = 'cover';
   BODY.style.backgroundRepeat = 'no-repeat';
   BODY.style.color = '#fff';
