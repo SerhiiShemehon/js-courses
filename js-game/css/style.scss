@@ -1,0 +1,43 @@
+@import 'reset';
+
+.game-holder{
+  width: 700px;
+  padding: 30px;
+  margin: 0 auto;
+}
+
+.game-nav{
+  margin-bottom: 25px;
+  &:after{
+    content: '';
+    display: block;
+    clear: both;
+  }
+  &>span{
+    float: right;
+    font-size: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1.2;
+  }
+  button {
+    border: 0;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 10px 30px;
+    border-radius: 15px;
+    background: green;
+    color: white;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.3s linear;
+    &:hover{
+      background: darken(green, 10%);
+    }
+  }
+}
+
+#canvas{
+  background: white;
+  border: 1px solid #000;
+}
