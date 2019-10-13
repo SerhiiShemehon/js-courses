@@ -1,10 +1,20 @@
+const body = document.querySelector('body');
 const btnStart = document.getElementById('btn-start');
 const btnStop = document.getElementById('btn-stop');
+const score = document.getElementById('score');
+const left = document.getElementById('left');
 
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
 let timer;
+let scoreNumber = 0;
+let leftNumber = 20;
+let clickCoordinatesX = 0;
+let clickCoordinatesY = 0;
+let min = 20;
+let max = 20;
+let gameOverBoolean = true;
 
 // использования requestAnimationFrame
 function animate(options) {
@@ -28,16 +38,6 @@ function animate(options) {
   });
 }
 
-// расчёта времени
-function makeEaseOut(timing) {
-  return function (timeFraction) {
-    return 1 - timing(1 - timeFraction);
-  }
-}
-function quad(timeFraction) {
-  return Math.pow(timeFraction, 2)
-}
-
 // фигура квадрат
 function Rect(x, shiftY, elemW, elemH, color) {
   this.x = x;
@@ -45,13 +45,35 @@ function Rect(x, shiftY, elemW, elemH, color) {
   this.y = 0;
   this.w = elemW;
   this.h = elemH;
+  let checkDraw = true;
 
-  this.draw = function (ctx) {
+  this.draw = function (ctx, miss) {
     ctx.beginPath();
     ctx.fillStyle = this.color;
     ctx.clearRect(this.x, this.y, this.w, this.h);
-    this.y = this.y + shiftY;
-    ctx.fillRect(this.x, this.y, this.w, this.h);
+    if (gameOverBoolean) {
+      if (!this.checkClick() && checkDraw){
+        this.y = this.y + shiftY;
+        ctx.fillRect(this.x, this.y, this.w, this.h);
+      } else {
+        if (checkDraw) {
+          counter();
+          clearTimeout(miss);
+        }
+        checkDraw = false;
+      }
+    } else {
+      ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+    }
+  }
+
+  this.checkClick = function () {
+    let checkClick = false;
+
+    if ((clickCoordinatesX >= this.x && clickCoordinatesX <= this.x + this.w) && (clickCoordinatesY >= this.y && clickCoordinatesY <= this.y + this.h) ) {
+      checkClick = true;
+    }
+    return checkClick;
   }
 }
 
@@ -81,43 +103,101 @@ function selectionPosition(canvas, widthRect) {
   return randomInteger(widthXMin, widthXMax);
 }
 
+// координаты клика 
+function clickCoordinates(event) {
+  clickCoordinatesX = event.offsetX;
+  clickCoordinatesY = event.offsetY;
+  setTimeout(() => {
+    clickCoordinatesX = 0;
+    clickCoordinatesY = 0;
+  }, 30);
+}
+
+// отрисовка игры
+function game() {
+  let widthRect = randomInteger(min, max);
+  let heightRect = randomInteger(min, max);
+  let positionRectX = selectionPosition(canvas, widthRect);
+  let colorRect = selectionColor();
+
+  let duration = 8200;
+  let shiftY = 1;
+  let miss = setTimeout(() => {
+    gameOver()
+  }, duration);
+
+  let rect = new Rect(positionRectX, shiftY, widthRect, heightRect, colorRect);
+
+
+  animate({
+    duration: duration,
+    timing: function (timeFraction) {
+      return timeFraction;
+    },
+    draw: function (progress) {
+      rect.draw(ctx, miss);
+    }
+  });
+}
+
+// игра
 function startGame() {
   btnStart.removeEventListener('click', startGame);
-  let interval = 1000;
-
-  function game() {
-    let widthRect = randomInteger(10, 30);
-    let heightRect = randomInteger(10, 30);
-    let positionRectX = selectionPosition(canvas, widthRect);
-    let colorRect = selectionColor();
-
-    let duration = 8100;
-    let shiftY = 1;
-
-    let rect = new Rect(positionRectX, shiftY, widthRect, heightRect, colorRect);
-
-
-    animate({
-      duration: duration,
-      timing: makeEaseOut(quad),
-      draw: function (progress) {
-        rect.draw(ctx);
-      }
-    });
-  }
+  canvas.addEventListener('click', clickCoordinates);
+  gameOverBoolean = true;
+  scoreNumber = 0;
+  leftNumber = 20;
+  left.innerText = leftNumber;
+  score.innerText = scoreNumber;
 
   game();
-
   timer = setInterval(() => {
     game();
-  }, interval);
+  }, 1000);
 }
+
+
+// игра закончена
+function gameOver() {
+  if (leftNumber > 0){
+    left.innerText = leftNumber - 1;
+  } else if (leftNumber === 0 ){
+    btnStart.addEventListener('click', startGame);
+    clearInterval(timer);
+    gameOverBoolean = false;
+
+    let holder = document.createElement('div');
+    holder.classList.add('game-over');
+    let holderHtml = `<h1>Game over</h1><h2>You hit ${scoreNumber} times</h2>`;
+    holder.innerHTML = holderHtml;
+    body.appendChild(holder);
+  }
+  leftNumber--;
+}
+
+// счетчик
+function counter() {
+  scoreNumber++;
+  score.innerText = scoreNumber;
+  if (scoreNumber > 50) {
+    min = 10;
+    max = 10;
+  }else if (scoreNumber > 30){
+    min = 15;
+    max = 15;
+  } else if (scoreNumber > 20) {
+    min = 10;
+    max = 30;
+  } else if (scoreNumber > 10) {
+    min = 15;
+    max = 30;
+  }
+}
+
 
 btnStart.addEventListener('click', startGame);
 
-
 btnStop.addEventListener('click', function () {
-  btnStop.removeEventListener('click', startGame);
-  btnStart.addEventListener('click', startGame);
   clearInterval(timer);
+  btnStart.addEventListener('click', startGame);
 });

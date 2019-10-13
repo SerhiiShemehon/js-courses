@@ -20,24 +20,52 @@
     vertical-align: middle;
     line-height: 1.2;
   }
-  button {
-    border: 0;
-    display: inline-block;
-    vertical-align: middle;
-    padding: 10px 30px;
-    border-radius: 15px;
-    background: green;
-    color: white;
-    font-family: inherit;
-    cursor: pointer;
-    transition: background 0.3s linear;
-    &:hover{
-      background: darken(green, 10%);
-    }
-  }
 }
 
 #canvas{
   background: white;
   border: 1px solid #000;
+  cursor: url(../images/aim.cur), default;
+}
+
+.game-over{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+h1{
+  font-size: 45px;
+  margin-bottom: 10px;
+}
+h2{
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+button {
+  border: 0;
+  display: inline-block;
+  vertical-align: middle;
+  padding: 10px 30px;
+  border-radius: 15px;
+  background: green;
+  color: white;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.3s linear;
+  margin-right: 10px;
+
+  &:hover {
+    background: darken(green, 10%);
+  }
 }
