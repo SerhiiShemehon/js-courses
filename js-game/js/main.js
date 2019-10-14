@@ -15,6 +15,8 @@ let clickCoordinatesY = 0;
 let min = 20;
 let max = 20;
 let gameOverBoolean = true;
+let duration = 8200;
+let shiftY = 1;
 
 // использования requestAnimationFrame
 function animate(options) {
@@ -120,8 +122,18 @@ function game() {
   let positionRectX = selectionPosition(canvas, widthRect);
   let colorRect = selectionColor();
 
-  let duration = 8200;
-  let shiftY = 1;
+  if( randomInteger(1, 3) === 1 ){
+    duration = 2750;
+    shiftY = 3; 
+  } else if (randomInteger(1, 3) === 2) {
+    duration = 4100;
+    shiftY = 2;
+  } else {
+    duration = 8200;
+    shiftY = 1;
+  }
+
+  
   let miss = setTimeout(() => {
     gameOver()
   }, duration);
