@@ -8,10 +8,10 @@ $searchForm.on('submit', function (event) {
   event.preventDefault();
   let query = jQuery(this).find('#search-term').val().replace(/\s/g, '+');
   $titlePage.text('Search for: ' + query);
-  getBooks(query);
+  getVideo(query);
 });
 
-function getBooks(query) {
+function getVideo(query) {
   let url = 'https://itunes.apple.com/search';
 
   jQuery.ajax({
